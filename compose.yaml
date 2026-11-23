@@ -1,0 +1,15 @@
+name: telegram-queues
+
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN:?Укажите BOT_TOKEN в .env}
+      BOT_TIMEZONE: ${BOT_TIMEZONE:-Europe/Moscow}
+      DB_PATH: /data/queues.sqlite3
+    volumes:
+      - queues:/data
+
+volumes:
+  queues:
